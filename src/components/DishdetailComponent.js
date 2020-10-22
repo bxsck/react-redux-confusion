@@ -27,7 +27,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
           }
         handleSubmit(values){
             this.toggleModal();
-            this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+            this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
         }
 
         render(){
@@ -52,9 +52,9 @@ const minLength = (len) => (val) => val && (val.length >= len);
                                 </Col>
                                 </Row>
                                 <Row className="form-group">
-                                    <Label htmlFor="name" md={12}>Your Name</Label>
+                                    <Label htmlFor="author" md={12}>Your Name</Label>
                                     <Col md={12}>
-                                    <Control.text model=".name" id="name" name="name"
+                                    <Control.text model=".author" id="author" name="author"
                                         placeholder="Your Name"
                                         className="form-control"
                                         validators={{
@@ -116,7 +116,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                 <div></div>
             );
     }
-    function RenderComments({comments, addComment, dishId}) {
+    function RenderComments({comments, postComment, dishId}) {
         if(comments != null)
             return(
                 <div className="col-12 col-md-5 m-1">
@@ -131,7 +131,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                             );
                         })}
                     </ul>
-                    <CommentForm dishId={dishId} addComment={addComment} />
+                    <CommentForm dishId={dishId} postComment={postComment} />
                 </div>
             )
     
@@ -172,7 +172,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
             <div className="row">
                 <RenderDish dish={props.dish} />
                 <RenderComments comments={props.comments}
-                    addComment={props.addComment}
+                    postComment={props.postComment} 
                     dishId={props.dish.id}
                      />
                  
